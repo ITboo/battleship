@@ -1,17 +1,17 @@
-import { createWebSocketStream, WebSocketServer } from 'ws';
+import { createWebSocketStream, WebSocketServer, WebSocket } from 'ws';
 
-const listenWebSocketServer = (port) => {
+const listenWebSocketServer = (port: number) => {
     const websocket = new WebSocketServer({ port });
 
-    websocket.on('connection', async (webSocket) => {
+    websocket.on('connection', async (webSocket: WebSocket) => {
         const webSocketStream = createWebSocketStream(webSocket, {
             decodeStrings: false,
             encoding: 'utf8',
         });
 
-        webSocketStream.on('data', async (data) => {
+        webSocketStream.on('data', async (data: string) => {
             try {
-                console.log();
+                console.log(`received ${data}`);
             } catch (error) {
                 console.log();
             }
